@@ -30,6 +30,28 @@
                 <link href="/admin/sass/semi-dark.css" rel="stylesheet">
                 <link href="/admin/sass/bordered-theme.css" rel="stylesheet">
                 <link href="/admin/sass/responsive.css" rel="stylesheet">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        const orgImage = "${user.avatar}";
+                        if (orgImage) {
+                            const urlImage = "/admin/images/avatars/" + orgImage;
+                            $("#avatarPreview").attr("src", urlImage);
+                            $("#avatarPreview").css({ "display": "block" });
+                        }
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var today = new Date().toISOString().split('T')[0];
+                        document.getElementById('bsValidation8').value = today;
+                    });
+                </script>
 
             </head>
 
@@ -39,194 +61,26 @@
 
                 <main class="main-wrapper">
                     <div class="main-content">
-                        <!--breadcrumb-->
-                        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                            <div class="breadcrumb-title pe-3">eCommerce</div>
-                            <div class="ps-3">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb mb-0 p-0">
-                                        <li class="breadcrumb-item"><a href="javascript:;"><i
-                                                    class="bx bx-home-alt"></i></a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">Users</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                            <div class="ms-auto">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary">Settings</button>
-                                    <button type="button"
-                                        class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                                        data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a
-                                            class="dropdown-item" href="javascript:;">Action</a>
-                                        <a class="dropdown-item" href="javascript:;">Another action</a>
-                                        <a class="dropdown-item" href="javascript:;">Something else here</a>
-                                        <div class="dropdown-divider"></div> <a class="dropdown-item"
-                                            href="javascript:;">Separated
-                                            link</a>
-                                    </div>
-                                </div>
-                            </div>
+
+
+                        <div class="alert alert-danger" role="alert">
+                            Are you sure delete this product?
                         </div>
-                        <!--end breadcrumb-->
-
-                        <div
-                            class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-medium flex-wrap font-text1">
-                            <a href="javascript:;"><span class="me-1">All</span><span
-                                    class="text-secondary">(88754)</span></a>
-                            <a href="javascript:;"><span class="me-1">Published</span><span
-                                    class="text-secondary">(56242)</span></a>
-                            <a href="javascript:;"><span class="me-1">Drafts</span><span
-                                    class="text-secondary">(17)</span></a>
-                            <a href="javascript:;"><span class="me-1">On Discount</span><span
-                                    class="text-secondary">(88754)</span></a>
-                        </div>
-
-                        <div class="row g-3">
-                            <div class="col-auto">
-                                <div class="position-relative">
-                                    <input class="form-control px-5" type="search" placeholder="Search Users">
-                                    <span
-                                        class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">search</span>
-                                </div>
+                        <form:form action="/admin/user/delete" method="post" modelAttribute="user">
+                            <div class="mb-3" style="display: none;">
+                                <label class="form-label">Id:</label>
+                                <form:input type="text" class="form-control" path="id" value="${id}" />
                             </div>
-                            <div class="col-auto flex-grow-1 overflow-auto">
-                                <div class="btn-group position-static">
-                                    <div class="btn-group position-static">
-                                        <button type="button" class="btn btn-filter dropdown-toggle px-4"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Category
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="javascript:;">Action</a></li>
-                                            <li><a class="dropdown-item" href="javascript:;">Another action</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="btn-group position-static">
-                                        <button type="button" class="btn btn-filter dropdown-toggle px-4"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Vendor
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="javascript:;">Action</a></li>
-                                            <li><a class="dropdown-item" href="javascript:;">Another action</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="btn-group position-static">
-                                        <button type="button" class="btn btn-filter dropdown-toggle px-4"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Collection
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="javascript:;">Action</a></li>
-                                            <li><a class="dropdown-item" href="javascript:;">Another action</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <div class="d-flex align-items-center gap-2 justify-content-lg-end">
-                                    <button class="btn btn-filter px-4"><i
-                                            class="bi bi-box-arrow-right me-2"></i>Export</button>
-                                    <a href="/admin/user/create" class="btn btn-primary px-4"><i
-                                            class="bi bi-plus-lg me-2"></i>Add
-                                        User</a>
-                                </div>
-                            </div>
-                        </div><!--end row-->
-
-                        <div class="card mt-4">
-                            <div class="card-body">
-                                <div class="product-table">
-                                    <div class="white-space-nowrap">
-                                        <table class="table align-middle ">
-                                            <thead class="table-light">
-                                                <tr class="justify-content-between">
-                                                    <th>
-                                                        <input class="form-check-input" type="checkbox">
-                                                    </th>
-                                                    <th>ID</th>
-                                                    <th>Email</th>
-                                                    <th>Full Name</th>
-                                                    <th>Phone</th>
-                                                    <th>Role</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="user" items="${users}">
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox">
-                                                        </td>
-                                                        <td>${user.id}</td>
-                                                        <td>${user.email}</td>
-                                                        <td>
-                                                            <div class="product-info">
-                                                                <a href="javascript:;"
-                                                                    class="product-title">${user.fullName}</a>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>${user.phone}</td>
-                                                        <td>${user.role.name}</td>
-                                                        <td>
-                                                            <a href="/admin/user/${user.id}"
-                                                                class="btn btn-success">View</a>
-                                                            <a href="/admin/user/delete/${user.id}"
-                                                                class="btn btn-danger">Delete</a>
-                                                            <!-- <div class="dropdown">
-                                                                <button
-                                                                    class="btn btn-sm btn-filter  dropdown-toggle dropdown-toggle-nocaret"
-                                                                    type="button" data-bs-toggle="dropdown">
-                                                                    <i class="bi bi-three-dots"></i>
-                                                                </button>
-                                                                <ul class="dropdown-menu">
-                                                                    <li><a class="dropdown-item" href="#">Action</a>
-                                                                    </li>
-                                                                    <li><a class="dropdown-item" href="#">Another
-                                                                            action</a>
-                                                                    </li>
-                                                                    <li><a class="dropdown-item" href="#">Something else
-                                                                            here</a></li>
-                                                                </ul>
-                                                            </div> -->
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
+                            <button type="submit" class="btn btn-danger">Confirm</button>
+                        </form:form>
 
 
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
 
                     </div>
                 </main>
-                <!--end main wrapper-->
-
 
                 <!--start overlay-->
                 <div class="overlay btn-toggle"></div>
@@ -249,8 +103,8 @@
                         <div class="order-list">
                             <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                                 <div class="order-img">
-                                    <img src="/admin/images/orders/01.png" class="img-fluid rounded-3" width="75"
-                                        alt="">
+                                    <img src="/admin/images/avatars/${user.avatar}" class="img-fluid rounded-3"
+                                        width="75" alt="">
                                 </div>
                                 <div class="order-info flex-grow-1">
                                     <h5 class="mb-1 order-title">White Men Shoes</h5>
@@ -264,8 +118,8 @@
 
                             <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                                 <div class="order-img">
-                                    <img src="/admin/images/orders/02.png" class="img-fluid rounded-3" width="75"
-                                        alt="">
+                                    <img src="/admin/images/avatars/${user.avatar}" class="img-fluid rounded-3"
+                                        width="75" alt="">
                                 </div>
                                 <div class="order-info flex-grow-1">
                                     <h5 class="mb-1 order-title">Red Airpods</h5>

@@ -7,7 +7,7 @@
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>Create new user</title>
+                <title>Dashboard</title>
                 <!--favicon-->
                 <link rel="icon" href="/admin/images/favicon-32x32.png" type="image/png">
                 <!-- loader-->
@@ -34,6 +34,12 @@
                 <script>
                     $(document).ready(() => {
                         const avatarFile = $("#avatarFile");
+                        const orgImage = "${user.avatar}";
+                        if (orgImage) {
+                            const urlImage = "/admin/images/avatars/" + orgImage;
+                            $("#avatarPreview").attr("src", urlImage);
+                            $("#avatarPreview").css({ "display": "block" });
+                        }
                         avatarFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);
@@ -46,12 +52,12 @@
                         document.getElementById('bsValidation8').value = today;
                     });
                 </script>
+
             </head>
 
             <body>
                 <jsp:include page="../layout/header.jsp" />
                 <jsp:include page="../layout/sidebar.jsp" />
-
 
                 <main class="main-wrapper">
                     <div class="main-content">
@@ -64,7 +70,7 @@
                                         <li class="breadcrumb-item"><a href="javascript:;"><i
                                                     class="bx bx-home-alt"></i></a>
                                         </li>
-                                        <li class="breadcrumb-item active" aria-current="page">Validations</li>
+                                        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -80,8 +86,7 @@
                                         <a class="dropdown-item" href="javascript:;">Another action</a>
                                         <a class="dropdown-item" href="javascript:;">Something else here</a>
                                         <div class="dropdown-divider"></div> <a class="dropdown-item"
-                                            href="javascript:;">Separated
-                                            link</a>
+                                            href="javascript:;">Separated link</a>
                                     </div>
                                 </div>
                             </div>
@@ -89,16 +94,70 @@
                         <!--end breadcrumb-->
 
 
-                        <div class="row">
-                            <div class="col-xl-6 mx-auto">
-                                <div class="card">
-                                    <div class="card-header px-4 py-3">
-                                        <h5 class="mb-0">Create a User</h5>
+                        <div class="card rounded-4">
+                            <div class="card-body p-4">
+                                <div class="position-relative mb-5">
+                                    <img src="assets/images/gallery/profile-cover.png"
+                                        class="img-fluid rounded-4 shadow" alt="">
+                                    <div class="profile-avatar position-absolute top-100 start-50 translate-middle">
+                                        <img src="/admin/images/avatars/${user.avatar}"
+                                            class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170"
+                                            height="170" alt="">
                                     </div>
+                                </div>
+                                <div class="profile-info pt-5 d-flex align-items-center justify-content-between">
+                                    <div class="">
+                                        <h3>${user.fullName}</h3>
+                                        <p class="mb-0">${user.address}<br>
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <a href="javascript:;" class="btn btn-grd-primary rounded-5 px-4"><i
+                                                class="bi bi-chat me-2"></i>Send Message</a>
+                                    </div>
+                                </div>
+                                <div class="kewords d-flex align-items-center gap-3 mt-4 overflow-x-auto">
+                                    <button type="button" class="btn btn-sm btn-light rounded-5 px-4">UX
+                                        Research</button>
+                                    <button type="button" class="btn btn-sm btn-light rounded-5 px-4">CX
+                                        Strategy</button>
+                                    <button type="button"
+                                        class="btn btn-sm btn-light rounded-5 px-4">Management</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-xl-8">
+                                <div class="card rounded-4 border-top border-4 border-primary border-gradient-1">
                                     <div class="card-body p-4">
-                                        <form:form action="/admin/user/create" class="row g-3 needs-validation"
-                                            novalidate="" method="post" modelAttribute="newUser"
+                                        <div class="d-flex align-items-start justify-content-between mb-3">
+                                            <div class="">
+                                                <h5 class="mb-0 fw-bold">Edit Profile</h5>
+                                            </div>
+                                            <div class="dropdown">
+                                                <a href="javascript:;"
+                                                    class="dropdown-toggle-nocaret options dropdown-toggle"
+                                                    data-bs-toggle="dropdown">
+                                                    <span class="material-icons-outlined fs-5">more_vert</span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="javascript:;">Action</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:;">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="javascript:;">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <form:form action="/admin/user/update" class="row g-3 needs-validation"
+                                            novalidate="" method="post" modelAttribute="user"
                                             enctype="multipart/form-data">
+                                            <div class="row mb-4" style="display: none;">
+                                                <div class="col"> <label class="form-label">Id:</label>
+                                                    <form:input type="text" class="form-control" path="id" />
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">
                                                 <label for="bsValidation4" class="form-label">Email</label>
                                                 <form:input type="email" class="form-control" id="bsValidation4"
@@ -108,15 +167,6 @@
                                                     Please provide a valid email.
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <label for="bsValidation5" class="form-label">Password</label>
-                                                <form:input type="password" class="form-control" id="bsValidation5"
-                                                    placeholder="Password" required="" path="password" />
-                                                <div class="invalid-feedback">
-                                                    Please choose a password.
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-6">
                                                 <label for="bsValidation1" class="form-label">Full Name</label>
                                                 <form:input type="text" class="form-control" id="bsValidation1"
@@ -134,6 +184,14 @@
                                                     Please choose a username.
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">
+                                                <label for="bsValidation8" class="form-label">Updated At</label>
+                                                <form:input type="date" class="form-control" id="bsValidation8"
+                                                    required="" path="updatedAt" />
+                                                <div class="invalid-feedback">
+                                                    Please select date.
+                                                </div>
+                                            </div>
                                             <div class="col-md-12">
                                                 <label for="bsValidation13" class="form-label">Address</label>
                                                 <form:textarea class="form-control" id="bsValidation13"
@@ -144,14 +202,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12">
-                                                <label for="bsValidation8" class="form-label">Created At</label>
-                                                <form:input type="date" class="form-control" id="bsValidation8"
-                                                    required="" path="createdAt" />
-                                                <div class="invalid-feedback">
-                                                    Please select date.
-                                                </div>
-                                            </div>
+
                                             <div class="col-md-6">
                                                 <label for="bsValidation9" class="form-label">Role</label>
                                                 <form:select id="bsValidation9" class="form-select" required=""
@@ -171,15 +222,15 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="row mb-4">
-                                                    <img style="max-height: 250px;display: none;" alt="avatar preview"
-                                                        id="avatarPreview">
+                                                    <img src="" style="max-height: 250px;display: none;"
+                                                        alt="avatar preview" id="avatarPreview">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-12">
                                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                                    <button type="submit"
-                                                        class="btn btn-grd-primary px-4">Submit</button>
+                                                    <button type="submit" class="btn btn-grd-primary px-4">Update
+                                                        profile</button>
                                                     <button type="reset" class="btn btn-grd-info px-4">Reset</button>
                                                 </div>
                                             </div>
@@ -187,14 +238,159 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--end row-->
+                            <div class="col-12 col-xl-4">
+                                <div class="card rounded-4">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between mb-3">
+                                            <div class="">
+                                                <h5 class="mb-0 fw-bold">About</h5>
+                                            </div>
+                                            <div class="dropdown">
+                                                <a href="javascript:;"
+                                                    class="dropdown-toggle-nocaret options dropdown-toggle"
+                                                    data-bs-toggle="dropdown">
+                                                    <span class="material-icons-outlined fs-5">more_vert</span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="javascript:;">Action</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:;">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="javascript:;">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="full-info">
+                                            <div class="info-list d-flex flex-column gap-3">
+                                                <div class="info-list-item d-flex align-items-center gap-3"><span
+                                                        class="material-icons-outlined">account_circle</span>
+                                                    <p class="mb-0">Full Name: ${user.fullName}</p>
+                                                </div>
+                                                <div class="info-list-item d-flex align-items-center gap-3"><span
+                                                        class="material-icons-outlined">done</span>
+                                                    <p class="mb-0">Status: active</p>
+                                                </div>
+                                                <div class="info-list-item d-flex align-items-center gap-3"><span
+                                                        class="material-icons-outlined">code</span>
+                                                    <p class="mb-0">Role: ${user.role.name}</p>
+                                                </div>
+                                                <div class="info-list-item d-flex align-items-center gap-3"><span
+                                                        class="material-icons-outlined">flag</span>
+                                                    <p class="mb-0">Country: VIET NAM</p>
+                                                </div>
+                                                <div class="info-list-item d-flex align-items-center gap-3"><span
+                                                        class="material-icons-outlined">language</span>
+                                                    <p class="mb-0">Language: Vietnamese</p>
+                                                </div>
+                                                <div class="info-list-item d-flex align-items-center gap-3"><span
+                                                        class="material-icons-outlined">send</span>
+                                                    <p class="mb-0">Email: ${user.email}</p>
+                                                </div>
+                                                <div class="info-list-item d-flex align-items-center gap-3"><span
+                                                        class="material-icons-outlined">call</span>
+                                                    <p class="mb-0">Phone: ${user.phone}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card rounded-4">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between mb-3">
+                                            <div class="">
+                                                <h5 class="mb-0 fw-bold">Accounts</h5>
+                                            </div>
+                                            <div class="dropdown">
+                                                <a href="javascript:;"
+                                                    class="dropdown-toggle-nocaret options dropdown-toggle"
+                                                    data-bs-toggle="dropdown">
+                                                    <span class="material-icons-outlined fs-5">more_vert</span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="javascript:;">Action</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:;">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="javascript:;">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="account-list d-flex flex-column gap-4">
+                                            <div class="account-list-item d-flex align-items-center gap-3">
+                                                <img src="/admin/images/apps/05.png" width="35" alt="">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">Google</h6>
+                                                    <p class="mb-0">Events and Reserch</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked="">
+                                                </div>
+                                            </div>
+                                            <div class="account-list-item d-flex align-items-center gap-3">
+                                                <img src="/admin/images/apps/02.png" width="35" alt="">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">Skype</h6>
+                                                    <p class="mb-0">Events and Reserch</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked="">
+                                                </div>
+                                            </div>
+                                            <div class="account-list-item d-flex align-items-center gap-3">
+                                                <img src="/admin/images/apps/03.png" width="35" alt="">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">Slack</h6>
+                                                    <p class="mb-0">Communication</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked="">
+                                                </div>
+                                            </div>
+                                            <div class="account-list-item d-flex align-items-center gap-3">
+                                                <img src="/admin/images/apps/06.png" width="35" alt="">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">Instagram</h6>
+                                                    <p class="mb-0">Social Network</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked="">
+                                                </div>
+                                            </div>
+                                            <div class="account-list-item d-flex align-items-center gap-3">
+                                                <img src="/admin/images/apps/17.png" width="35" alt="">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">Facebook</h6>
+                                                    <p class="mb-0">Social Network</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked="">
+                                                </div>
+                                            </div>
+                                            <div class="account-list-item d-flex align-items-center gap-3">
+                                                <img src="/admin/images/apps/11.png" width="35" alt="">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">Paypal</h6>
+                                                    <p class="mb-0">Social Network</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!--end row-->
 
 
 
                     </div>
                 </main>
-
 
                 <!--start overlay-->
                 <div class="overlay btn-toggle"></div>
@@ -217,8 +413,8 @@
                         <div class="order-list">
                             <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                                 <div class="order-img">
-                                    <img src="/admin/images/orders/01.png" class="img-fluid rounded-3" width="75"
-                                        alt="">
+                                    <img src="/admin/images/avatars/${user.avatar}" class="img-fluid rounded-3"
+                                        width="75" alt="">
                                 </div>
                                 <div class="order-info flex-grow-1">
                                     <h5 class="mb-1 order-title">White Men Shoes</h5>
@@ -232,8 +428,8 @@
 
                             <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
                                 <div class="order-img">
-                                    <img src="/admin/images/orders/02.png" class="img-fluid rounded-3" width="75"
-                                        alt="">
+                                    <img src="/admin/images/avatars/${user.avatar}" class="img-fluid rounded-3"
+                                        width="75" alt="">
                                 </div>
                                 <div class="order-info flex-grow-1">
                                     <h5 class="mb-1 order-title">Red Airpods</h5>
