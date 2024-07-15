@@ -81,7 +81,7 @@
                     <li><a href="ecommerce-add-product.html"><i class="material-icons-outlined">arrow_right</i>Add
                             Product</a>
                     </li>
-                    <li><a href="ecommerce-products.html"><i class="material-icons-outlined">arrow_right</i>Products</a>
+                    <li><a href="/admin/product"><i class="material-icons-outlined">arrow_right</i>Products</a>
                     </li>
                     <li><a href="/admin/user"><i class="material-icons-outlined">arrow_right</i>Users</a>
                     </li>

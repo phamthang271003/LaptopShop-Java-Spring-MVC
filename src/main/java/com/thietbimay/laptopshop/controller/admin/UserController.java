@@ -50,7 +50,7 @@ public class UserController {
         user.setAvatar(avatar);
         user.setPassword(hashPassword);
         user.setRole(this.userService.handleGetRoleByName(user.getRole().getName()));
-        this.userService.handleSaveUser(user);
+        // this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
 
@@ -78,7 +78,7 @@ public class UserController {
             currentUser.setFullName(user.getFullName());
             currentUser.setPhone(user.getPhone());
             currentUser.setUpdatedAt(user.getUpdatedAt());
-            this.userService.handleSaveUser(currentUser);
+            // this.userService.handleSaveUser(currentUser);
         }
 
         return "redirect:/admin/user";

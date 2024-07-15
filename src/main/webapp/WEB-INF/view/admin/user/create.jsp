@@ -102,12 +102,13 @@
                                             <div class="col-md-6">
                                                 <label for="bsValidation4" class="form-label">Email</label>
                                                 <form:input type="email" class="form-control" id="bsValidation4"
-                                                    placeholder="Email" required="" path="email" />
+                                                    placeholder="Email" path="email" required="" />
 
                                                 <div class="invalid-feedback">
                                                     Please provide a valid email.
                                                 </div>
                                             </div>
+
                                             <div class="col-md-6">
                                                 <label for="bsValidation5" class="form-label">Password</label>
                                                 <form:input type="password" class="form-control" id="bsValidation5"
