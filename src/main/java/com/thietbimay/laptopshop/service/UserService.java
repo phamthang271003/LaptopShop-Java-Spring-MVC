@@ -38,4 +38,8 @@ public class UserService {
     public User handleDeleteUserById(long id) {
         return this.userRepository.deleteById(id);
     }
+
+    public boolean checkEmailExist(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
 }

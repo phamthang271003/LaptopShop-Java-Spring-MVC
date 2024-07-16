@@ -1,6 +1,9 @@
 package com.thietbimay.laptopshop.domain;
 
 import java.time.LocalDate;
+
+import com.thietbimay.laptopshop.service.validator.UserChecked;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
+@UserChecked
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

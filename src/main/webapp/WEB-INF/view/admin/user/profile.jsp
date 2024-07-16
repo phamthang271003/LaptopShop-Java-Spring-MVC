@@ -153,36 +153,55 @@
                                         <form:form action="/admin/user/update" class="row g-3 needs-validation"
                                             novalidate="" method="post" modelAttribute="user"
                                             enctype="multipart/form-data">
+                                            <c:set var="errorEmail">
+                                                <form:errors path="email" cssClass="invalid-feedback" />
+                                            </c:set>
+
+                                            <c:set var="errorFullName">
+                                                <form:errors path="fullName" cssClass="invalid-feedback" />
+                                            </c:set>
+
+                                            <c:set var="errorPhone">
+                                                <form:errors path="phone" cssClass="invalid-feedback" />
+                                            </c:set>
+
+                                            <c:set var="errorAddress">
+                                                <form:errors path="address" cssClass="invalid-feedback" />
+                                            </c:set>
+
                                             <div class="row mb-4" style="display: none;">
                                                 <div class="col"> <label class="form-label">Id:</label>
                                                     <form:input type="text" class="form-control" path="id" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <label for="bsValidation4" class="form-label">Email</label>
-                                                <form:input type="email" class="form-control" id="bsValidation4"
-                                                    placeholder="Email" required="" path="email" />
-
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid email.
+                                            <div class="row mb-4" style="display: none;">
+                                                <div class="col"> <label class="form-label">Password:</label>
+                                                    <form:input type="text" class="form-control" path="password" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
+                                                <label for="bsValidation4" class="form-label">Email</label>
+                                                <form:input type="email"
+                                                    class="form-control  ${not empty errorEmail ? 'is-invalid' : ''}"
+                                                    id="bsValidation4" placeholder="Email" required="" path="email" />
+                                                ${errorEmail}
+
+                                            </div>
+                                            <div class="col-md-6">
                                                 <label for="bsValidation1" class="form-label">Full Name</label>
-                                                <form:input type="text" class="form-control" id="bsValidation1"
-                                                    placeholder="First Name" value="" required="" path="fullName" />
-                                                <div class="valid-feedback">
-                                                    Looks good!
-                                                </div>
+                                                <form:input type="text"
+                                                    class="form-control ${not empty errorFullName ? 'is-invalid' : ''}"
+                                                    id="bsValidation1" placeholder="First Name" value="" required=""
+                                                    path="fullName" />
+                                                ${errorFullName}
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label for="bsValidation3" class="form-label">Phone</label>
-                                                <form:input type="text" class="form-control" id="bsValidation3"
-                                                    placeholder="Phone" required="" path="phone" />
-                                                <div class="invalid-feedback">
-                                                    Please choose a username.
-                                                </div>
+                                                <form:input type="text"
+                                                    class="form-control ${not empty errorPhone ? 'is-invalid' : ''}"
+                                                    id="bsValidation3" placeholder="Phone" required="" path="phone" />
+                                                ${errorPhone}
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="bsValidation8" class="form-label">Updated At</label>
@@ -194,12 +213,12 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <label for="bsValidation13" class="form-label">Address</label>
-                                                <form:textarea class="form-control" id="bsValidation13"
-                                                    placeholder="Address ..." rows="3" required="" path="address" />
+                                                <form:textarea
+                                                    class="form-control ${not empty errorAddress ? 'is-invalid' : ''}"
+                                                    id="bsValidation13" placeholder="Address ..." rows="3" required=""
+                                                    path="address" />
 
-                                                <div class="invalid-feedback">
-                                                    Please enter a valid address.
-                                                </div>
+                                                ${errorAddress}
                                             </div>
 
 
@@ -210,9 +229,7 @@
                                                     <form:option value="ADMIN">Admin</form:option>
                                                     <form:option value="USER">User</form:option>
                                                 </form:select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid country.
-                                                </div>
+
                                             </div>
 
                                             <div class="col-md-6">
