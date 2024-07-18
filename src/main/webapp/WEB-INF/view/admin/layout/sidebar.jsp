@@ -78,7 +78,7 @@
                     <div class="menu-title">eCommerce</div>
                 </a>
                 <ul>
-                    <li><a href="ecommerce-add-product.html"><i class="material-icons-outlined">arrow_right</i>Add
+                    <li><a href="/admin/product/create"><i class="material-icons-outlined">arrow_right</i>Add
                             Product</a>
                     </li>
                     <li><a href="/admin/product"><i class="material-icons-outlined">arrow_right</i>Products</a>

@@ -649,7 +649,7 @@
                 <script>
                     $(".data-attributes span").peity("donut")
                 </script>
-                <script src="/admin/js/dashboard2.js"></script>
+                <!-- <script src="/admin/js/dashboard2.js"></script> -->
                 <script src="/admin/js/main.js"></script>
 
 

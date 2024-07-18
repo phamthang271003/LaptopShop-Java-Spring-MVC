@@ -1,14 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
             <!doctype html>
             <html lang="en" data-bs-theme="dark">
 
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>Create new user</title>
+                <title>Maxton | Bootstrap 5 Admin Dashboard Template</title>
                 <!--favicon-->
                 <link rel="icon" href="/admin/images/favicon-32x32.png" type="image/png">
                 <!-- loader-->
@@ -18,12 +17,14 @@
                 <!--plugins-->
                 <link href="/admin/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
                 <link rel="stylesheet" type="text/css" href="/admin/plugins/metismenu/metisMenu.min.css">
+                <link href="/admin/plugins/fancy-file-uploader/fancy_fileupload.css" rel="stylesheet">
                 <link rel="stylesheet" type="text/css" href="/admin/plugins/metismenu/mm-vertical.css">
                 <link rel="stylesheet" type="text/css" href="/admin/plugins/simplebar/css/simplebar.css">
                 <!--bootstrap css-->
                 <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
                 <link href="/admin/css/font2.css" rel="stylesheet">
                 <link href="/admin/css/font1.css" rel="stylesheet">
+                <!--main css-->
                 <link href="/admin/css/bootstrap-extended.css" rel="stylesheet">
                 <link href="/admin/sass/main.css" rel="stylesheet">
                 <link href="/admin/sass/dark-theme.css" rel="stylesheet">
@@ -31,29 +32,22 @@
                 <link href="/admin/sass/semi-dark.css" rel="stylesheet">
                 <link href="/admin/sass/bordered-theme.css" rel="stylesheet">
                 <link href="/admin/sass/responsive.css" rel="stylesheet">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
                 <script>
-                    $(document).ready(() => {
-                        const avatarFile = $("#avatarFile");
-                        avatarFile.change(function (e) {
-                            const imgURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imgURL);
-                            $("#avatarPreview").css({ "display": "block" });
-                        });
-                    });
 
                     document.addEventListener("DOMContentLoaded", function () {
                         var today = new Date().toISOString().split('T')[0];
                         document.getElementById('bsValidation8').value = today;
                     });
                 </script>
+
             </head>
 
             <body>
                 <jsp:include page="../layout/header.jsp" />
                 <jsp:include page="../layout/sidebar.jsp" />
 
-
+                <!--start main wrapper-->
                 <main class="main-wrapper">
                     <div class="main-content">
                         <!--breadcrumb-->
@@ -65,7 +59,7 @@
                                         <li class="breadcrumb-item"><a href="javascript:;"><i
                                                     class="bx bx-home-alt"></i></a>
                                         </li>
-                                        <li class="breadcrumb-item active" aria-current="page">Validations</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Starter Page</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -81,144 +75,208 @@
                                         <a class="dropdown-item" href="javascript:;">Another action</a>
                                         <a class="dropdown-item" href="javascript:;">Something else here</a>
                                         <div class="dropdown-divider"></div> <a class="dropdown-item"
-                                            href="javascript:;">Separated
-                                            link</a>
+                                            href="javascript:;">Separated link</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!--end breadcrumb-->
-
-
                         <div class="row">
-                            <div class="col-xl-6 mx-auto">
+                            <div class="col-12 col-lg-8">
                                 <div class="card">
-                                    <div class="card-header px-4 py-3">
-                                        <h5 class="mb-0">Create a User</h5>
-                                    </div>
-                                    <div class="card-body p-4">
-                                        <form:form action="/admin/user/create" class="row g-3 needs-validation"
-                                            novalidate="" method="post" modelAttribute="newUser"
-                                            enctype="multipart/form-data">
-                                            <c:set var="errorEmail">
-                                                <form:errors path="email" cssClass="invalid-feedback" />
-                                            </c:set>
-
-                                            <c:set var="errorPassword">
-                                                <form:errors path="password" cssClass="invalid-feedback" />
-                                            </c:set>
-
-                                            <c:set var="errorFullName">
-                                                <form:errors path="fullName" cssClass="invalid-feedback" />
-                                            </c:set>
-
-                                            <c:set var="errorPhone">
-                                                <form:errors path="phone" cssClass="invalid-feedback" />
-                                            </c:set>
-
-                                            <c:set var="errorAddress">
-                                                <form:errors path="address" cssClass="invalid-feedback" />
-                                            </c:set>
-
-                                            <div class="col-md-6">
-                                                <label for="bsValidation4" class="form-label">Email</label>
-                                                <form:input type="email"
-                                                    class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
-                                                    id="bsValidation4" placeholder="Email" path="email" required="" />
-                                                ${errorEmail}
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label for="bsValidation5" class="form-label">Password</label>
-                                                <form:input type="password"
-                                                    class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
-                                                    id="bsValidation5" placeholder="Password" required=""
-                                                    path="password" />
-                                                ${errorPassword}
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label for="bsValidation1" class="form-label">Full Name</label>
-                                                <form:input type="text"
-                                                    class="form-control ${not empty errorFullName ? 'is-invalid' : ''}"
-                                                    id="bsValidation1" placeholder="First Name" value="" required=""
-                                                    path="fullName" />
-                                                ${errorFullName}
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label for="bsValidation3" class="form-label">Phone</label>
-                                                <form:input type="text"
-                                                    class="form-control ${not empty errorPhone ? 'is-invalid' : ''}"
-                                                    id="bsValidation3" placeholder="Phone" required="" path="phone" />
-                                                ${errorPhone}
-                                            </div>
-                                            <div class="col-md-12">
-                                                <label for="bsValidation13" class="form-label">Address</label>
-                                                <form:textarea
-                                                    class="form-control ${not empty errorAddress ? 'is-invalid' : ''}"
-                                                    id="bsValidation13" placeholder="Address ..." rows="3" required=""
-                                                    path="address" />
-
-                                                ${errorAddress}
-                                            </div>
-
-                                            <div class="col-md-12">
-                                                <label for="bsValidation8" class="form-label">Created At</label>
-                                                <form:input type="date" class="form-control" id="bsValidation8"
-                                                    required="" path="createdAt" />
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="bsValidation9" class="form-label">Role</label>
-                                                <form:select id="bsValidation9" class="form-select" required=""
-                                                    path="role.name">
-                                                    <form:option value="ADMIN">Admin</form:option>
-                                                    <form:option value="USER">User</form:option>
-                                                </form:select>
-
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label for="avatarFile" class="form-label">Avatar:</label>
-                                                <input class="form-control" type="file" id="avatarFile"
-                                                    accept=".png,.jpg,.jpeg" name="file" />
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="row mb-4">
-                                                    <img style="max-height: 250px;display: none;" alt="avatar preview"
-                                                        id="avatarPreview">
+                                    <div class="card-body">
+                                        <form:form action="/admin/product/create" method="post"
+                                            modelAttribute="newProduct" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4">
+                                                    <h5 class="mb-3">Name</h5>
+                                                    <form:input type="text" class="form-control"
+                                                        placeholder="write name here...." path="name" />
                                                 </div>
-                                            </div>
-
-                                            <div class="col-md-12">
-                                                <div class="d-md-flex d-grid align-items-center gap-3">
-                                                    <button type="submit"
-                                                        class="btn btn-grd-primary px-4">Submit</button>
-                                                    <button type="reset" class="btn btn-grd-info px-4">Reset</button>
+                                                <div class="col-md-6 mb-4">
+                                                    <h5 class="mb-3">Price</h5>
+                                                    <form:input type="text" class="form-control"
+                                                        placeholder="write price here...." path="price" />
                                                 </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <h5 class="mb-3">Quantity</h5>
+                                                    <form:input type="number" class="form-control"
+                                                        placeholder="write quantity here...." path="quantity" />
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <h5 class="mb-3">Sale</h5>
+                                                    <form:input type="number" class="form-control"
+                                                        placeholder="write title here...." path="discount" />
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <label for="AddCategory" class="form-label">Category</label>
+
+                                                    <form:select class="form-select" id="AddCategory"
+                                                        path="category.id">
+                                                        <c:forEach var="category" items="${categories}">
+                                                            <form:option value="${category.id}">${category.name}
+                                                            </form:option>
+                                                        </c:forEach>
+                                                    </form:select>
+
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <label for="AddBrand" class="form-label">Brand</label>
+                                                    <form:select class="form-select" id="AddBrand" path="brand.id">
+                                                        <c:forEach var="brand" items="${brands}">
+                                                            <form:option value="${brand.id}">${brand.name}
+                                                            </form:option>
+                                                        </c:forEach>
+                                                    </form:select>
+                                                </div>
+
+                                                <div class="col-md-12 mb-4">
+                                                    <label for="bsValidation8" class="form-label">Created At</label>
+                                                    <form:input type="date" class="form-control" id="bsValidation8"
+                                                        required="" path="createdAt" />
+
+                                                </div>
+
+                                                <div class="col-md-12 mb-4">
+                                                    <h5 class="mb-3">Product Description</h5>
+                                                    <form:textarea class="form-control" cols="4" rows="6"
+                                                        placeholder="write a description here.." path="detailDesc" />
+
+                                                </div>
+
+                                                <div class="col-md-12 mb-4">
+                                                    <h5 class="mb-3">Product Description</h5>
+                                                    <form:textarea class="form-control" cols="4" rows="6"
+                                                        placeholder="write a description here.." path="shortDesc" />
+                                                </div>
+                                                <div class="col-md-12 mb-4">
+                                                    <h5 class="mb-3">Product Description</h5>
+                                                    <textarea class="form-control" cols="4" rows="6"
+                                                        placeholder="write a description here.."></textarea>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <h5 class="mb-3">Display images</h5>
+                                                    <input id="fancy-file-upload" type="file" name="files"
+                                                        accept=".jpg, .png, image/jpeg, image/png" multiple="">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="d-grid">
+                                                        <button type="submit" class="btn btn-primary">Create</button>
+                                                    </div>
+                                                </div>
+                                                <!-- </div> -->
                                             </div>
                                         </form:form>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <button type="button" class="btn btn-outline-danger flex-fill"><i
+                                                    class="bi bi-x-circle me-2"></i>Discard</button>
+                                            <button type="button" class="btn btn-outline-success flex-fill"><i
+                                                    class="bi bi-cloud-download me-2"></i>Save Draft</button>
+                                            <button type="button" class="btn btn-outline-primary flex-fill"><i
+                                                    class="bi bi-send me-2"></i>Publish</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="mb-3">Organize</h5>
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <label for="AddCategory" class="form-label">Category</label>
+                                                <select class="form-select" id="AddCategory">
+                                                    <option value="0">Topwear</option>
+                                                    <option value="1">Bottomwear</option>
+                                                    <option value="2">Casual Tshirt</option>
+                                                    <option value="3">Electronic</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="Collection" class="form-label">Collection</label>
+                                                <input type="text" class="form-control" id="Collection"
+                                                    placeholder="Collection">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="Tags" class="form-label">Tags</label>
+                                                <input type="text" class="form-control" id="Tags" placeholder="Tags">
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <a href="javascript:;"
+                                                        class="btn btn-sm btn-light border shadow-sm">Woman <i
+                                                            class="bi bi-x"></i></a>
+                                                    <a href="javascript:;"
+                                                        class="btn btn-sm btn-light border shadow-sm">Fashion <i
+                                                            class="bi bi-x"></i></a>
+                                                    <a href="javascript:;"
+                                                        class="btn btn-sm btn-light border shadow-sm">Furniture
+                                                        <i class="bi bi-x"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="Vendor" class="form-label">Vendor</label>
+                                                <input type="text" class="form-control" id="Vendor"
+                                                    placeholder="Vendor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="mb-3">Variants</h5>
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <label for="Brand" class="form-label">Brand</label>
+                                                <input type="text" class="form-control" id="Brand" placeholder="Brand">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="SKU" class="form-label">SKU</label>
+                                                <input type="text" class="form-control" id="SKU" placeholder="SKU">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="Color" class="form-label">Color</label>
+                                                <input type="text" class="form-control" id="Color" placeholder="Color">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="Size" class="form-label">Size</label>
+                                                <input type="text" class="form-control" id="Size" placeholder="Size">
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-grid">
+                                                    <button type="button" class="btn btn-primary">Add
+                                                        Variants</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <!--end row-->
 
-
-
-                    </div>
                 </main>
+                <!--end main wrapper-->
 
 
                 <!--start overlay-->
                 <div class="overlay btn-toggle"></div>
                 <!--end overlay-->
 
-
                 <!--start footer-->
                 <jsp:include page="../layout/footer.jsp" />
-                <!--end footer-->
+                <!--top footer-->
 
                 <!--start cart-->
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart">
@@ -361,7 +419,6 @@
                 <!--end cart-->
 
 
-
                 <!--start switcher-->
                 <button
                     class="btn btn-grd btn-grd-primary position-fixed bottom-0 end-0 m-3 d-flex align-items-center gap-2"
@@ -445,13 +502,19 @@
                 <!--plugins-->
                 <script src="/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
                 <script src="/admin/plugins/metismenu/metisMenu.min.js"></script>
-                <script src="/admin/plugins/apexchart/apexcharts.min.js"></script>
-                <script src="/admin/plugins/simplebar/js/simplebar.min.js"></script>
-                <script src="/admin/plugins/peity/jquery.peity.min.js"></script>
+                <script src="/admin/plugins/fancy-file-uploader/jquery.ui.widget.js"></script>
+                <script src="/admin/plugins/fancy-file-uploader/jquery.fileupload.js"></script>
+                <script src="/admin/plugins/fancy-file-uploader/jquery.iframe-transport.js"></script>
+                <script src="/admin/plugins/fancy-file-uploader/jquery.fancy-fileupload.js"></script>
                 <script>
-                    $(".data-attributes span").peity("donut")
+                    $('#fancy-file-upload').FancyFileUpload({
+                        params: {
+                            action: 'fileuploader'
+                        },
+                        maxfilesize: 1000000
+                    });
                 </script>
-                <!-- <script src="/admin/js/dashboard2.js"></script> -->
+                <!-- <script src="/admin/plugins/simplebar/js/simplebar.min.js"></script> -->
                 <script src="/admin/js/main.js"></script>
 
 

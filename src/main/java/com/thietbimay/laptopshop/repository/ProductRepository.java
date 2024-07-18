@@ -1,9 +1,12 @@
-// package com.thietbimay.laptopshop.repository;
+package com.thietbimay.laptopshop.repository;
 
-// import org.springframework.stereotype.Repository;
-// import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-// @Repository
-// public class ProductRepository extends JpaRepository<Product, Long> {
+import com.thietbimay.laptopshop.domain.Product;
 
-// }
+import org.springframework.data.jpa.repository.JpaRepository;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long> {
+
+}
