@@ -1,6 +1,7 @@
 package com.thietbimay.laptopshop.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,7 +32,6 @@ public class Product {
     private long quantity;
     private long discount;
     private long sold;
-    private String thumbnail;
 
     private LocalDate createdAt;
     private LocalDate updatedAt;
@@ -43,11 +44,14 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @OneToMany(mappedBy = "product")
+    List<ProductImage> ProductImages;
+
     public Product() {
     }
 
     public Product(long id, String image, String name, String detailDesc, String shortDesc, double price, long quantity,
-            long discount, long sold, String thumbnail, LocalDate createdAt, LocalDate updatedAt, Brand brand,
+            long discount, long sold, LocalDate createdAt, LocalDate updatedAt, Brand brand,
             Category category) {
         this.id = id;
         this.image = image;
@@ -58,7 +62,6 @@ public class Product {
         this.quantity = quantity;
         this.discount = discount;
         this.sold = sold;
-        this.thumbnail = thumbnail;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.brand = brand;
@@ -137,14 +140,6 @@ public class Product {
         this.sold = sold;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
     public LocalDate getCreatedAt() {
         return createdAt;
     }
@@ -181,7 +176,7 @@ public class Product {
     public String toString() {
         return "Product [id=" + id + ", image=" + image + ", name=" + name + ", detailDesc=" + detailDesc
                 + ", shortDesc=" + shortDesc + ", price=" + price + ", quantity=" + quantity + ", discount=" + discount
-                + ", sold=" + sold + ", thumbnail=" + thumbnail + ", createdAt=" + createdAt + ", updatedAt="
+                + ", sold=" + sold + ", createdAt=" + createdAt + ", updatedAt="
                 + updatedAt + ", brand=" + brand + ", category=" + category + "]";
     }
 

@@ -34,8 +34,34 @@
                 <link href="/admin/sass/responsive.css" rel="stylesheet">
 
                 <script>
-
                     document.addEventListener("DOMContentLoaded", function () {
+                        const productFile = document.getElementById("productFile");
+                        const previewContainer = document.getElementById("previewContainer");
+
+                        productFile.addEventListener("change", function (e) {
+                            // Clear previous previews
+                            previewContainer.innerHTML = "";
+
+                            const files = e.target.files;
+                            for (let i = 0; i < files.length; i++) {
+                                const imgURL = URL.createObjectURL(files[i]);
+
+                                // Create an image element
+                                const imgElement = document.createElement("img");
+                                imgElement.src = imgURL;
+                                imgElement.style.maxHeight = "100px";
+                                imgElement.style.display = "block";
+                                imgElement.alt = "product preview";
+
+                                // Append the image to the preview container
+                                const colElement = document.createElement("div");
+                                colElement.className = "col-md-2";
+                                colElement.appendChild(imgElement);
+
+                                previewContainer.appendChild(colElement);
+                            }
+                        });
+
                         var today = new Date().toISOString().split('T')[0];
                         document.getElementById('bsValidation8').value = today;
                     });
@@ -82,7 +108,7 @@
                         </div>
                         <!--end breadcrumb-->
                         <div class="row">
-                            <div class="col-12 col-lg-8">
+                            <div class="col-12 col-lg-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <form:form action="/admin/product/create" method="post"
@@ -134,7 +160,18 @@
                                                     <label for="bsValidation8" class="form-label">Created At</label>
                                                     <form:input type="date" class="form-control" id="bsValidation8"
                                                         required="" path="createdAt" />
+                                                </div>
 
+                                                <div class="mb-4">
+                                                    <h5 class="mb-3">Product images</h5>
+                                                    <input class="form-control" type="file" id="productFile"
+                                                        name="files" multiple accept=".png, .jpg, .jpeg" />
+                                                </div>
+                                                <div class="row mb-4" id="previewContainer">
+                                                    <div class="col-md-2">
+                                                        <img style="max-height:100px;display: none;"
+                                                            alt="product preview" id="productPreview">
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-md-12 mb-4">
@@ -154,11 +191,7 @@
                                                     <textarea class="form-control" cols="4" rows="6"
                                                         placeholder="write a description here.."></textarea>
                                                 </div>
-                                                <div class="mb-4">
-                                                    <h5 class="mb-3">Display images</h5>
-                                                    <input id="fancy-file-upload" type="file" name="files"
-                                                        accept=".jpg, .png, image/jpeg, image/png" multiple="">
-                                                </div>
+
                                                 <div class="col-md-12">
                                                     <div class="d-grid">
                                                         <button type="submit" class="btn btn-primary">Create</button>
@@ -174,94 +207,6 @@
 
 
 
-
-                            </div>
-                            <div class="col-12 col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <button type="button" class="btn btn-outline-danger flex-fill"><i
-                                                    class="bi bi-x-circle me-2"></i>Discard</button>
-                                            <button type="button" class="btn btn-outline-success flex-fill"><i
-                                                    class="bi bi-cloud-download me-2"></i>Save Draft</button>
-                                            <button type="button" class="btn btn-outline-primary flex-fill"><i
-                                                    class="bi bi-send me-2"></i>Publish</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="mb-3">Organize</h5>
-                                        <div class="row g-3">
-                                            <div class="col-12">
-                                                <label for="AddCategory" class="form-label">Category</label>
-                                                <select class="form-select" id="AddCategory">
-                                                    <option value="0">Topwear</option>
-                                                    <option value="1">Bottomwear</option>
-                                                    <option value="2">Casual Tshirt</option>
-                                                    <option value="3">Electronic</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12">
-                                                <label for="Collection" class="form-label">Collection</label>
-                                                <input type="text" class="form-control" id="Collection"
-                                                    placeholder="Collection">
-                                            </div>
-                                            <div class="col-12">
-                                                <label for="Tags" class="form-label">Tags</label>
-                                                <input type="text" class="form-control" id="Tags" placeholder="Tags">
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <a href="javascript:;"
-                                                        class="btn btn-sm btn-light border shadow-sm">Woman <i
-                                                            class="bi bi-x"></i></a>
-                                                    <a href="javascript:;"
-                                                        class="btn btn-sm btn-light border shadow-sm">Fashion <i
-                                                            class="bi bi-x"></i></a>
-                                                    <a href="javascript:;"
-                                                        class="btn btn-sm btn-light border shadow-sm">Furniture
-                                                        <i class="bi bi-x"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <label for="Vendor" class="form-label">Vendor</label>
-                                                <input type="text" class="form-control" id="Vendor"
-                                                    placeholder="Vendor">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="mb-3">Variants</h5>
-                                        <div class="row g-3">
-                                            <div class="col-12">
-                                                <label for="Brand" class="form-label">Brand</label>
-                                                <input type="text" class="form-control" id="Brand" placeholder="Brand">
-                                            </div>
-                                            <div class="col-12">
-                                                <label for="SKU" class="form-label">SKU</label>
-                                                <input type="text" class="form-control" id="SKU" placeholder="SKU">
-                                            </div>
-                                            <div class="col-12">
-                                                <label for="Color" class="form-label">Color</label>
-                                                <input type="text" class="form-control" id="Color" placeholder="Color">
-                                            </div>
-                                            <div class="col-12">
-                                                <label for="Size" class="form-label">Size</label>
-                                                <input type="text" class="form-control" id="Size" placeholder="Size">
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="d-grid">
-                                                    <button type="button" class="btn btn-primary">Add
-                                                        Variants</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
@@ -502,10 +447,6 @@
                 <!--plugins-->
                 <script src="/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
                 <script src="/admin/plugins/metismenu/metisMenu.min.js"></script>
-                <script src="/admin/plugins/fancy-file-uploader/jquery.ui.widget.js"></script>
-                <script src="/admin/plugins/fancy-file-uploader/jquery.fileupload.js"></script>
-                <script src="/admin/plugins/fancy-file-uploader/jquery.iframe-transport.js"></script>
-                <script src="/admin/plugins/fancy-file-uploader/jquery.fancy-fileupload.js"></script>
                 <script>
                     $('#fancy-file-upload').FancyFileUpload({
                         params: {

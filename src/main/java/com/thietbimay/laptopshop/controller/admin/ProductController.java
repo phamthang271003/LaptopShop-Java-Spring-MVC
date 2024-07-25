@@ -12,8 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.thietbimay.laptopshop.domain.Brand;
 import com.thietbimay.laptopshop.domain.Category;
 import com.thietbimay.laptopshop.domain.Product;
+import com.thietbimay.laptopshop.domain.ProductImage;
 import com.thietbimay.laptopshop.service.BrandService;
 import com.thietbimay.laptopshop.service.CategoryService;
+import com.thietbimay.laptopshop.service.ProductImageService;
 import com.thietbimay.laptopshop.service.ProductService;
 import com.thietbimay.laptopshop.service.UploadService;
 import java.util.List;
@@ -27,13 +29,15 @@ public class ProductController {
     private final UploadService uploadService;
     private final CategoryService categoryService;
     private final BrandService brandService;
+    private final ProductImageService productImageService;
 
     public ProductController(ProductService productService, UploadService uploadService,
-            CategoryService categoryService, BrandService brandService) {
+            CategoryService categoryService, BrandService brandService, ProductImageService productImageService) {
         this.productService = productService;
         this.uploadService = uploadService;
         this.categoryService = categoryService;
         this.brandService = brandService;
+        this.productImageService = productImageService;
     }
 
     @GetMapping("/admin/product")
@@ -54,18 +58,24 @@ public class ProductController {
     @PostMapping("/admin/product/create")
     public String postCreateProduct(@ModelAttribute("newProduct") @Valid Product product,
             BindingResult newProductBindingResult,
-            @RequestParam("file") MultipartFile file) {
+            @RequestParam("files") MultipartFile[] files) {
 
         // validate
         if (newProductBindingResult.hasErrors()) {
             return "admin/product/create";
         }
 
-        // upload image
-        // String image = this.uploadService.handleSaveUploadFile(file, "product");
-        // product.setImage(image);
+        List<String> images = this.uploadService.handleSaveUploadMultiFile(files, "top-products");
 
-        // this.productService.handleSaveProduct(product);
+        this.productService.handleSaveProduct(product);
+
+        // Save images to product_images table
+        for (String image : images) {
+            ProductImage productImage = new ProductImage();
+            productImage.setProduct(product);
+            productImage.setImage(image);
+            this.productImageService.hanldeSaveProductImage(productImage);
+        }
         return "redirect:/admin/product";
     }
 
