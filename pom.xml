@@ -30,6 +30,7 @@
 	<properties>
 		<java.version>21</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -92,8 +93,21 @@
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 		</dependency>
 
-	</dependencies>
+		<dependency>
+			<groupId>com.cksource</groupId>
+			<artifactId>ckfinder3</artifactId>
+			<version>4.0.1</version>
+		</dependency>
 
+
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>cksource-mvn-repo</id>
+			<name>CKSource Maven Repository</name>
+			<url>https://maven.cksource.com/</url>
+		</repository>
+	</repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -104,3 +118,4 @@
 	</build>
 
 </project>
+

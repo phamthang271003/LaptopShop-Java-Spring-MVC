@@ -17,7 +17,6 @@
                 <!--plugins-->
                 <link href="/admin/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
                 <link rel="stylesheet" type="text/css" href="/admin/plugins/metismenu/metisMenu.min.css">
-                <link href="/admin/plugins/fancy-file-uploader/fancy_fileupload.css" rel="stylesheet">
                 <link rel="stylesheet" type="text/css" href="/admin/plugins/metismenu/mm-vertical.css">
                 <link rel="stylesheet" type="text/css" href="/admin/plugins/simplebar/css/simplebar.css">
                 <!--bootstrap css-->
@@ -32,8 +31,11 @@
                 <link href="/admin/sass/semi-dark.css" rel="stylesheet">
                 <link href="/admin/sass/bordered-theme.css" rel="stylesheet">
                 <link href="/admin/sass/responsive.css" rel="stylesheet">
+                <script src="/static/ckeditor/ckeditor.js"></script>
+
 
                 <script>
+
                     document.addEventListener("DOMContentLoaded", function () {
                         const productFile = document.getElementById("productFile");
                         const previewContainer = document.getElementById("previewContainer");
@@ -64,8 +66,13 @@
 
                         var today = new Date().toISOString().split('T')[0];
                         document.getElementById('bsValidation8').value = today;
+
+
+
                     });
                 </script>
+
+
 
             </head>
 
@@ -94,7 +101,8 @@
                                     <button type="button" class="btn btn-primary">Settings</button>
                                     <button type="button"
                                         class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                                        data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
+                                        data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle
+                                            Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a
                                             class="dropdown-item" href="javascript:;">Action</a>
@@ -175,21 +183,25 @@
                                                 </div>
 
                                                 <div class="col-md-12 mb-4">
-                                                    <h5 class="mb-3">Product Description</h5>
+                                                    <h5 class="mb-3">Outstanding Description</h5>
                                                     <form:textarea class="form-control" cols="4" rows="6"
-                                                        placeholder="write a description here.." path="detailDesc" />
+                                                        placeholder="write a outstanding description here.."
+                                                        path="outStandingDesc" name="outStandingDesc"
+                                                        id="outStandingDesc" />
 
                                                 </div>
 
                                                 <div class="col-md-12 mb-4">
-                                                    <h5 class="mb-3">Product Description</h5>
+                                                    <h5 class="mb-3">Parameter Description</h5>
                                                     <form:textarea class="form-control" cols="4" rows="6"
-                                                        placeholder="write a description here.." path="shortDesc" />
+                                                        placeholder="write a parameter description here.."
+                                                        path="parameterDesc" name="parameterDesc" id="parameterDesc" />
                                                 </div>
                                                 <div class="col-md-12 mb-4">
-                                                    <h5 class="mb-3">Product Description</h5>
-                                                    <textarea class="form-control" cols="4" rows="6"
-                                                        placeholder="write a description here.."></textarea>
+                                                    <h5 class="mb-3">Detail Description</h5>
+                                                    <form:textarea class="form-control" cols="4" rows="6"
+                                                        placeholder="write a detail description here.."
+                                                        path="detailDesc" name="detailDesc" id="detailDesc" />
                                                 </div>
 
                                                 <div class="col-md-12">
@@ -200,7 +212,6 @@
                                                 <!-- </div> -->
                                             </div>
                                         </form:form>
-
                                     </div>
 
                                 </div>
@@ -447,18 +458,30 @@
                 <!--plugins-->
                 <script src="/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
                 <script src="/admin/plugins/metismenu/metisMenu.min.js"></script>
-                <script>
-                    $('#fancy-file-upload').FancyFileUpload({
-                        params: {
-                            action: 'fileuploader'
-                        },
-                        maxfilesize: 1000000
-                    });
-                </script>
                 <!-- <script src="/admin/plugins/simplebar/js/simplebar.min.js"></script> -->
                 <script src="/admin/js/main.js"></script>
 
+                <script>
+                    CKEDITOR.replace('detailDesc', {
+                        filebrowserBrowseUrl: '/ckfinder/static/ckfinder.html',
+                        filebrowserImageBrowseUrl: '/ckfinder/static/ckfinder.html?type=Images',
+                        filebrowserUploadUrl: '/ckfinder/static/core/connector/java/connector.java?command=QuickUpload&type=Files',
+                        filebrowserImageUploadUrl: '/ckfinder/static/core/connector/java/connector.java?command=QuickUpload&type=Images'
 
+                    });
+                    CKEDITOR.replace('parameterDesc', {
+                        filebrowserBrowseUrl: '/ckfinder/static/ckfinder.html',
+                        filebrowserImageBrowseUrl: '/ckfinder/static/ckfinder.html?type=Images',
+                        filebrowserUploadUrl: '/ckfinder/static/core/connector/java/connector.java?command=QuickUpload&type=Files',
+                        filebrowserImageUploadUrl: '/ckfinder/static/core/connector/java/connector.java?command=QuickUpload&type=Images'
+                    });
+                    CKEDITOR.replace('outStandingDesc', {
+                        filebrowserBrowseUrl: '/ckfinder/static/ckfinder.html',
+                        filebrowserImageBrowseUrl: '/ckfinder/static/ckfinder.html?type=Images',
+                        filebrowserUploadUrl: '/ckfinder/static/core/connector/java/connector.java?command=QuickUpload&type=Files',
+                        filebrowserImageUploadUrl: '/ckfinder/static/core/connector/java/connector.java?command=QuickUpload&type=Images'
+                    });
+                </script>
             </body>
 
             </html>

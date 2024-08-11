@@ -19,14 +19,16 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String image;
     private String name;
 
     @Column(columnDefinition = "MEDIUMTEXT")
-    private String detailDesc;
+    private String outStandingDesc;
 
     @Column(columnDefinition = "MEDIUMTEXT")
-    private String shortDesc;
+    private String parameterDesc;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
+    private String detailDesc;
 
     private double price;
     private long quantity;
@@ -50,14 +52,14 @@ public class Product {
     public Product() {
     }
 
-    public Product(long id, String image, String name, String detailDesc, String shortDesc, double price, long quantity,
-            long discount, long sold, LocalDate createdAt, LocalDate updatedAt, Brand brand,
-            Category category) {
+    public Product(long id, String name, String outStandingDesc, String parameterDesc, String detailDesc,
+            double price, long quantity, long discount, long sold, LocalDate createdAt, LocalDate updatedAt,
+            Brand brand, Category category, List<ProductImage> productImages) {
         this.id = id;
-        this.image = image;
         this.name = name;
+        this.outStandingDesc = outStandingDesc;
+        this.parameterDesc = parameterDesc;
         this.detailDesc = detailDesc;
-        this.shortDesc = shortDesc;
         this.price = price;
         this.quantity = quantity;
         this.discount = discount;
@@ -66,6 +68,7 @@ public class Product {
         this.updatedAt = updatedAt;
         this.brand = brand;
         this.category = category;
+        ProductImages = productImages;
     }
 
     public long getId() {
@@ -76,14 +79,6 @@ public class Product {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getName() {
         return name;
     }
@@ -92,20 +87,28 @@ public class Product {
         this.name = name;
     }
 
+    public String getOutStandingDesc() {
+        return outStandingDesc;
+    }
+
+    public void setOutStandingDesc(String outStandingDesc) {
+        this.outStandingDesc = outStandingDesc;
+    }
+
+    public String getParameterDesc() {
+        return parameterDesc;
+    }
+
+    public void setParameterDesc(String parameterDesc) {
+        this.parameterDesc = parameterDesc;
+    }
+
     public String getDetailDesc() {
         return detailDesc;
     }
 
     public void setDetailDesc(String detailDesc) {
         this.detailDesc = detailDesc;
-    }
-
-    public String getShortDesc() {
-        return shortDesc;
-    }
-
-    public void setShortDesc(String shortDesc) {
-        this.shortDesc = shortDesc;
     }
 
     public double getPrice() {
@@ -172,12 +175,20 @@ public class Product {
         this.category = category;
     }
 
+    public List<ProductImage> getProductImages() {
+        return ProductImages;
+    }
+
+    public void setProductImages(List<ProductImage> productImages) {
+        ProductImages = productImages;
+    }
+
     @Override
     public String toString() {
-        return "Product [id=" + id + ", image=" + image + ", name=" + name + ", detailDesc=" + detailDesc
-                + ", shortDesc=" + shortDesc + ", price=" + price + ", quantity=" + quantity + ", discount=" + discount
-                + ", sold=" + sold + ", createdAt=" + createdAt + ", updatedAt="
-                + updatedAt + ", brand=" + brand + ", category=" + category + "]";
+        return "Product [id=" + id + ", name=" + name + ", outStandingDesc=" + outStandingDesc
+                + ", parameterDesc=" + parameterDesc + ", detailDesc=" + detailDesc + ", price=" + price + ", quantity="
+                + quantity + ", discount=" + discount + ", sold=" + sold + ", createdAt=" + createdAt + ", updatedAt="
+                + updatedAt + ", brand=" + brand + ", category=" + category + ", ProductImages=" + ProductImages + "]";
     }
 
 }
