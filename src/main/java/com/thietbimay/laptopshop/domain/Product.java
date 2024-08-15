@@ -37,6 +37,7 @@ public class Product {
 
     private LocalDate createdAt;
     private LocalDate updatedAt;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
@@ -52,8 +53,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(long id, String name, String outStandingDesc, String parameterDesc, String detailDesc,
-            double price, long quantity, long discount, long sold, LocalDate createdAt, LocalDate updatedAt,
+    public Product(long id, String name, String outStandingDesc, String parameterDesc, String detailDesc, double price,
+            long quantity, long discount, long sold, LocalDate createdAt, LocalDate updatedAt, String status,
             Brand brand, Category category, List<ProductImage> productImages) {
         this.id = id;
         this.name = name;
@@ -66,6 +67,7 @@ public class Product {
         this.sold = sold;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.status = status;
         this.brand = brand;
         this.category = category;
         ProductImages = productImages;
@@ -159,6 +161,14 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Brand getBrand() {
         return brand;
     }
@@ -185,10 +195,11 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product [id=" + id + ", name=" + name + ", outStandingDesc=" + outStandingDesc
-                + ", parameterDesc=" + parameterDesc + ", detailDesc=" + detailDesc + ", price=" + price + ", quantity="
-                + quantity + ", discount=" + discount + ", sold=" + sold + ", createdAt=" + createdAt + ", updatedAt="
-                + updatedAt + ", brand=" + brand + ", category=" + category + ", ProductImages=" + ProductImages + "]";
+        return "Product [id=" + id + ", name=" + name + ", outStandingDesc=" + outStandingDesc + ", parameterDesc="
+                + parameterDesc + ", detailDesc=" + detailDesc + ", price=" + price + ", quantity=" + quantity
+                + ", discount=" + discount + ", sold=" + sold + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+                + ", status=" + status + ", brand=" + brand + ", category=" + category + ", ProductImages="
+                + ProductImages + "]";
     }
 
 }

@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
             <!doctype html>
             <html lang="en" data-bs-theme="dark">
 
@@ -164,10 +165,19 @@
                                                     </form:select>
                                                 </div>
 
-                                                <div class="col-md-12 mb-4">
+                                                <div class="col-md-6 mb-4">
                                                     <label for="bsValidation8" class="form-label">Created At</label>
                                                     <form:input type="date" class="form-control" id="bsValidation8"
                                                         required="" path="createdAt" />
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <label for="AddBrand" class="form-label">Status</label>
+                                                    <form:select class="form-select" id="AddBrand" path="status">
+                                                        <form:option value="IN STOCK">In Stock
+                                                        </form:option>
+                                                        <form:option value="OUT OF STOCK">Out Of Stock
+                                                        </form:option>
+                                                    </form:select>
                                                 </div>
 
                                                 <div class="mb-4">
