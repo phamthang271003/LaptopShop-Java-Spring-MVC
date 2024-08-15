@@ -65,6 +65,7 @@
 
                         var today = new Date().toISOString().split('T')[0];
                         document.getElementById('bsValidation8').value = today;
+                        document.getElementById('bsValidation9').value = today;
 
 
 
@@ -170,9 +171,15 @@
                                                     </form:select>
                                                 </div>
 
+                                                <div class="col-md-6 mb-4" style="display: none;">
+                                                    <label for="bsValidation8" class="form-label">Created At</label>
+                                                    <form:input type="date" class="form-control" id="bsValidation8"
+                                                        required="" path="createdAt" />
+                                                </div>
+
                                                 <div class="col-md-6 mb-4">
                                                     <label for="bsValidation8" class="form-label">Updated At</label>
-                                                    <form:input type="date" class="form-control" id="bsValidation8"
+                                                    <form:input type="date" class="form-control" id="bsValidation9"
                                                         required="" path="updatedAt" />
                                                 </div>
                                                 <div class="col-md-6 mb-4">

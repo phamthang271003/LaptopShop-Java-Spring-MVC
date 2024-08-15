@@ -141,6 +141,7 @@ public class ProductController {
                 currentProduct.setPrice(product.getPrice());
                 currentProduct.setDiscount(product.getDiscount());
                 currentProduct.setQuantity(product.getQuantity());
+                currentProduct.setCreatedAt(product.getCreatedAt());
                 currentProduct
                         .setCategory(this.productService.handleGetCategoryByName(product.getCategory().getName()));
                 currentProduct.setBrand(this.productService.handleGetBrandByName(product.getBrand().getName()));
